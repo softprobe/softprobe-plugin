@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "blackbox": {
+      "url": "https://explorer.softprobe.ai/mcp"
+    }
+  }
+}

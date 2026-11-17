@@ -104,12 +104,19 @@ class GatewayTests(unittest.TestCase):
 
 
 class InstallDryTests(unittest.TestCase):
-    def test_single_skill_md_in_repo(self) -> None:
-        skill_mds = list(ROOT.rglob("SKILL.md"))
-        # Only the canonical skill (ignore anything under .git if present)
-        skill_mds = [p for p in skill_mds if ".git" not in p.parts]
-        self.assertEqual(len(skill_mds), 1)
-        self.assertEqual(skill_mds[0], ROOT / "skills" / "softprobe-agent-qa" / "SKILL.md")
+    def test_expected_skill_mds_in_repo(self) -> None:
+        skill_mds = {
+            p.relative_to(ROOT).as_posix()
+            for p in ROOT.rglob("SKILL.md")
+            if ".git" not in p.parts
+        }
+        self.assertEqual(
+            skill_mds,
+            {
+                "skills/softprobe-agent-qa/SKILL.md",
+                "plugins/blackbox/skills/blackbox/SKILL.md",
+            },
+        )
 
 
 if __name__ == "__main__":
