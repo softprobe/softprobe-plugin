@@ -1,0 +1,21 @@
+{
+  "name": "blackbox",
+  "displayName": "Softprobe Blackbox",
+  "description": "Diagnose Blackbox sessions, traces, generations, and tool errors in Softprobe Explorer.",
+  "version": "0.2.0",
+  "author": {
+    "name": "SoftProbe, Inc.",
+    "email": "support@softprobe.ai"
+  },
+  "homepage": "https://explorer.softprobe.ai",
+  "repository": "https://github.com/softprobe/softprobe-plugin",
+  "license": "Apache-2.0",
+  "keywords": [
+    "softprobe",
+    "blackbox",
+    "observability",
+    "tracing",
+    "opentelemetry",
+    "agent-qa"
+  ]
+}
