@@ -1,0 +1,29 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "blackbox",
+  "version": "0.2.0",
+  "description": "Softprobe Blackbox MCP server and skills for investigating AI agent sessions, OpenTelemetry traces, spans, logs, and managing Explorer agents.",
+  "author": {
+    "name": "SoftProbe, Inc.",
+    "email": "support@softprobe.ai",
+    "url": "https://softprobe.ai"
+  },
+  "homepage": "https://explorer.softprobe.ai",
+  "repository": "https://github.com/softprobe/softprobe-plugin",
+  "license": "Apache-2.0",
+  "keywords": [
+    "softprobe",
+    "blackbox",
+    "mcp",
+    "observability",
+    "opentelemetry",
+    "debugging"
+  ],
+  "extensions": {
+    "com.openai": {
+      "displayName": "Softprobe Blackbox",
+      "category": "Developer Tools",
+      "logo": "assets/softprobe-mark.svg"
+    }
+  }
+}

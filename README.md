@@ -1,76 +1,121 @@
-# Softprobe Skills
+# Softprobe Plugin Marketplace
 
-Apache-2.0 skills and Claude Code plugin for **Softprobe Agent QA**: ask your coding agent to investigate Sessions and traces in [Explorer](https://explorer.softprobe.ai).
+Official multi-product plugin marketplace from SoftProbe, Inc. (`softprobe/softprobe-plugin`).
 
-This is **not** the OpenCode capture package (`@softprobe/opencode-plugin`). Capture installs from Explorer; this repo is for **read-only diagnose**.
+## Plugins
 
-## Two steps (hosted MCP)
+| Plugin | Path | Description |
+|---|---|---|
+| `blackbox` | [`plugins/blackbox/`](./plugins/blackbox/) | Hosted Explorer MCP server (`https://explorer.softprobe.ai/mcp`) and skills for session, trace, span, log, and Agent workflows. |
 
-### 1. Add Softprobe MCP
+## Install Softprobe Blackbox
 
-**Claude Code**
+### Claude Code
 
-```bash
-claude mcp add --transport http softprobe https://explorer.softprobe.ai/mcp
-```
-
-**Cursor**
-
-Settings → MCP → Add server (URL / HTTP):
-
-`https://explorer.softprobe.ai/mcp`
-
-Or:
+Install the plugin from the marketplace:
 
 ```bash
-cursor --add-mcp '{"name":"softprobe","url":"https://explorer.softprobe.ai/mcp"}'
+claude plugin marketplace add softprobe/softprobe-plugin
+claude plugin install blackbox@softprobe
 ```
 
-### 2. Ask your coding agent
-
-> Use Softprobe: why did session `sess_…` fail? Check tool errors and the last generation.
-
-The first tool call opens a browser to sign in to Softprobe (OAuth). After you Allow, the agent can use `get_session`, `search_sessions`, and the other read-only tools.
-
-Docs: [Investigate with a coding agent](https://docs.softprobe.ai/en/agent-qa/coding-agent-skills)
-
-## Optional: skill package
-
-Install the skill text (investigation playbook) beside MCP:
+Or add the hosted MCP server directly:
 
 ```bash
-npx skills add softprobe/softprobe-skills -g -y \
-  -a cursor -a claude-code -a codex -a opencode \
-  -s softprobe-agent-qa
+claude mcp add --transport http blackbox https://explorer.softprobe.ai/mcp
 ```
 
-## Fallback: local stdio MCP
+### Cursor
 
-If you cannot use hosted MCP (air-gapped / custom Explorer):
+Install from Cursor Settings under **Plugins** using `softprobe/softprobe-plugin`, or add the MCP server via CLI or `.cursor/mcp.json`:
 
 ```bash
-npx skills add softprobe/softprobe-skills -g -y \
-  -a cursor -a claude-code -a codex -a opencode \
-  -s softprobe-agent-qa
-bash ~/.agents/skills/softprobe-agent-qa/scripts/install-mcp.sh
-python3 ~/.agents/skills/softprobe-agent-qa/scripts/login.py
+cursor --add-mcp '{"name":"blackbox","url":"https://explorer.softprobe.ai/mcp"}'
 ```
 
-## Layout (DRY)
+### Codex CLI
+
+Install the plugin from `.agents/plugins/marketplace.json`, or add the hosted MCP server:
+
+```bash
+codex mcp add blackbox --url https://explorer.softprobe.ai/mcp
+```
+
+### VS Code and GitHub Copilot
+
+Add the hosted MCP server via CLI or `.vscode/mcp.json`:
+
+```bash
+code --add-mcp '{"name":"blackbox","type":"http","url":"https://explorer.softprobe.ai/mcp"}'
+```
+
+### Gemini CLI
+
+Install the extension directly from GitHub:
+
+```bash
+gemini extensions install https://github.com/softprobe/softprobe-plugin
+```
+
+### Antigravity
+
+Add `plugins/blackbox/mcp_config.json` to `~/.gemini/config/mcp_config.json` (global) or `.agents/mcp_config.json` (workspace), and install the skill:
+
+```bash
+npx skills add softprobe/softprobe-plugin -g -y -a antigravity -s blackbox
+```
+
+### OpenCode
+
+Add the hosted MCP server and skill:
+
+```bash
+opencode mcp add blackbox --global --url https://explorer.softprobe.ai/mcp
+npx skills add softprobe/softprobe-plugin -g -y -a opencode -s blackbox
+```
+
+### Windsurf
+
+Add the `mcpServers.blackbox` entry from `plugins/blackbox/mcp_config.json` to `~/.codeium/windsurf/mcp_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "blackbox": {
+      "url": "https://explorer.softprobe.ai/mcp"
+    }
+  }
+}
+```
+
+## Authenticate and use
+
+The first MCP tool call opens a browser window to sign in to [Softprobe Explorer](https://explorer.softprobe.ai) via OAuth. After you approve access, ask your agent to investigate telemetry or manage Agents.
+
+> Use Blackbox: why did session `sess_...` fail? Check tool errors, spans, and correlated logs.
+
+## Repository layout
 
 ```text
-skills/softprobe-agent-qa/     # skill playbook + local stdio fallback
-.claude-plugin/plugin.json
-install.sh
+assets/softprobe-mark.svg                  # Marketplace brand mark
+plugins/
+  blackbox/
+    plugin.json                            # Agent Plugins manifest
+    .mcp.json                              # Streamable HTTP MCP config
+    mcp_config.json                        # Antigravity / Windsurf MCP config
+    assets/softprobe-mark.svg              # Plugin logo
+    skills/blackbox/SKILL.md               # Blackbox skill & tool reference
+skills/softprobe-agent-qa/                 # Legacy skill package & local stdio fallback
+tests/                                     # Manifest and MCP server tests
 ```
 
 ## License
 
-Apache License 2.0 — see [LICENSE](./LICENSE) and [NOTICE](./NOTICE).
+Apache License 2.0. See [LICENSE](./LICENSE) and [NOTICE](./NOTICE).
 
-## Operator note (Explorer)
+## Operator note
 
-Hosted MCP lives on Explorer: `POST /mcp`, OAuth at `/oauth/*`, discovery under `/.well-known/`. Supabase Auth redirect allowlist must include:
+Hosted MCP runs on Explorer (`POST /mcp`, OAuth under `/oauth/*`, discovery under `/.well-known/`). The Supabase Auth redirect allowlist must include:
 
 - `https://explorer.softprobe.ai/auth/cli**`
 - `https://explorer.softprobe.ai/oauth/authorize**`

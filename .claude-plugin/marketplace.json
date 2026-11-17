@@ -1,0 +1,25 @@
+{
+  "name": "softprobe",
+  "owner": {
+    "name": "SoftProbe, Inc.",
+    "email": "support@softprobe.ai"
+  },
+  "metadata": {
+    "description": "Official Softprobe plugins for AI coding agents.",
+    "version": "0.2.0"
+  },
+  "plugins": [
+    {
+      "name": "blackbox",
+      "source": "./plugins/blackbox",
+      "description": "Diagnose Blackbox sessions, traces, generations, and tool errors in Softprobe Explorer.",
+      "version": "0.2.0",
+      "author": {
+        "name": "SoftProbe, Inc.",
+        "email": "support@softprobe.ai"
+      },
+      "license": "Apache-2.0",
+      "category": "monitoring"
+    }
+  ]
+}
