@@ -4,9 +4,11 @@ Official multi-product plugin marketplace from SoftProbe, Inc. (`softprobe/softp
 
 ## Plugins
 
-| Plugin | Path | Description |
-|---|---|---|
-| `softprobe-blackbox` | [`plugins/softprobe-blackbox/`](./plugins/softprobe-blackbox/) | Hosted Explorer MCP server (`https://explorer.softprobe.ai/mcp`) and skills for session, trace, span, log, and Agent workflows. |
+| Plugin | Path | Status | Description |
+|---|---|---|---|
+| `softprobe-blackbox` | [`plugins/softprobe-blackbox/`](./plugins/softprobe-blackbox/) | Available | Hosted Explorer MCP server (`https://explorer.softprobe.ai/mcp`) and skills for session, trace, span, log, and Agent workflows. |
+| `softprobe-arex` | [`plugins/softprobe-arex/`](./plugins/softprobe-arex/) | Coming soon | Record, replay, and diff verification. |
+| `softprobe-lisa` | [`plugins/softprobe-lisa/`](./plugins/softprobe-lisa/) | Coming soon | Policy evaluation and activity monitoring. |
 
 ## Install Softprobe Blackbox
 
@@ -105,8 +107,9 @@ plugins/
     mcp_config.json                        # Antigravity / Windsurf MCP config
     assets/softprobe-mark.svg              # Plugin logo
     skills/blackbox/SKILL.md               # Blackbox skill & tool reference
-skills/softprobe-agent-qa/                 # Legacy skill package & local stdio fallback
-tests/                                     # Manifest and MCP server tests
+  softprobe-arex/                          # Coming soon: record, replay, and diff verification
+  softprobe-lisa/                          # Coming soon: policy evaluation and activity monitoring
+tests/                                     # Manifest and skill placement tests
 ```
 
 ## License
