@@ -108,20 +108,32 @@ The first MCP tool call opens a browser window to sign in to [Softprobe Explorer
 
 > Use Blackbox: why did session `sess_...` fail? Check tool errors, spans, and correlated logs.
 
+## Blackbox MCP tools (17)
+
+The hosted server at `https://explorer.softprobe.ai/mcp` exposes 17 tools (see [`plugins/softprobe-blackbox/skills/blackbox/references/mcp-tools.md`](./plugins/softprobe-blackbox/skills/blackbox/references/mcp-tools.md) for full parameter schemas):
+
+- **Auth & workspaces:** `whoami`, `list_workspaces`, `select_workspace`
+- **Sessions:** `search_sessions`, `get_session`, `get_session_spans`
+- **Spans:** `search_spans`, `get_span`
+- **Traces:** `search_traces`, `list_trace_tags`, `list_trace_tag_values`, `get_trace`
+- **Logs:** `logs_by_session`, `logs_by_trace`
+- **Agents & ingestion keys:** `list_agents`, `create_agent`, `get_ingestion_key`
+
 ## Repository layout
 
 ```text
-assets/softprobe-mark.svg                  # Marketplace brand mark
+assets/softprobe-mark.svg                           # Marketplace brand mark
 plugins/
   softprobe-blackbox/
-    plugin.json                            # Agent Plugins manifest
-    .mcp.json                              # Streamable HTTP MCP config
-    mcp_config.json                        # Antigravity / Windsurf MCP config
-    assets/softprobe-mark.svg              # Plugin logo
-    skills/blackbox/SKILL.md               # Blackbox skill & tool reference
-  softprobe-arex/                          # Coming soon: record, replay, and diff verification
-  softprobe-lisa/                          # Coming soon: policy evaluation and activity monitoring
-tests/                                     # Manifest and skill placement tests
+    plugin.json                                     # Agent Plugins manifest
+    .mcp.json                                       # Streamable HTTP MCP config
+    mcp_config.json                                 # Antigravity / Windsurf MCP config
+    assets/softprobe-mark.svg                       # Plugin logo
+    skills/blackbox/SKILL.md                        # Blackbox skill & tool routing
+    skills/blackbox/references/mcp-tools.md         # Full 17-tool MCP reference
+  softprobe-arex/                                   # Coming soon: record, replay, and diff verification
+  softprobe-lisa/                                   # Coming soon: policy evaluation and activity monitoring
+tests/                                              # Manifest and skill placement tests
 ```
 
 ## License

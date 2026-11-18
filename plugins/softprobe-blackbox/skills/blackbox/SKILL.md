@@ -25,6 +25,7 @@ If `blackbox` tools are unavailable, tell the user to add the server in their cl
 | Search spans in a window | `search_spans` | Requires UTC `from_time` and `to_time` |
 | Inspect one span | `get_span` | Pass `span_id`; optional `from`, `to`, `session_id` |
 | Search traces with TraceQL | `search_traces` | Includes unassigned traces without `session_id` |
+| Discover TraceQL tag names and values | `list_trace_tags`, `list_trace_tag_values` | Inspect span/resource attributes before `search_traces` |
 | Inspect one trace | `get_trace` | Pass `trace_id`; optional `from`, `to`, `session_id` |
 | Read correlated logs | `logs_by_session`, `logs_by_trace` | Bounded scan (`limit` 1 to 500, default 100) |
 | List or create Agents | `list_agents`, `create_agent` | `create_agent` returns a new Ingestion Key |
