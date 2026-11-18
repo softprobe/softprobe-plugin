@@ -114,7 +114,7 @@ class InstallDryTests(unittest.TestCase):
             skill_mds,
             {
                 "skills/softprobe-agent-qa/SKILL.md",
-                "plugins/blackbox/skills/blackbox/SKILL.md",
+                "plugins/softprobe-blackbox/skills/blackbox/SKILL.md",
             },
         )
 

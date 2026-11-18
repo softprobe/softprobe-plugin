@@ -5,10 +5,10 @@
   },
   "plugins": [
     {
-      "name": "blackbox",
+      "name": "softprobe-blackbox",
       "source": {
         "source": "local",
-        "path": "./plugins/blackbox"
+        "path": "./plugins/softprobe-blackbox"
       },
       "policy": {
         "installation": "AVAILABLE",

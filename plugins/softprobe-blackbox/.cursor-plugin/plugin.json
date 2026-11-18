@@ -1,5 +1,5 @@
 {
-  "name": "blackbox",
+  "name": "softprobe-blackbox",
   "displayName": "Softprobe Blackbox",
   "description": "Diagnose Blackbox sessions, traces, generations, and tool errors in Softprobe Explorer.",
   "version": "0.2.0",

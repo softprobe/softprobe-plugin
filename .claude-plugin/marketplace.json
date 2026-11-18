@@ -10,8 +10,8 @@
   },
   "plugins": [
     {
-      "name": "blackbox",
-      "source": "./plugins/blackbox",
+      "name": "softprobe-blackbox",
+      "source": "./plugins/softprobe-blackbox",
       "description": "Diagnose Blackbox sessions, traces, generations, and tool errors in Softprobe Explorer.",
       "version": "0.2.0",
       "author": {
