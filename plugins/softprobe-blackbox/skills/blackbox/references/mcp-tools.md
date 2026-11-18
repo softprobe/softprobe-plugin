@@ -1,6 +1,6 @@
 # Blackbox MCP tool reference
 
-All 15 tools exposed by `https://explorer.softprobe.ai/mcp` (`softprobe/explorer` `src/mcp/tools.ts`).
+All 17 tools exposed by `https://explorer.softprobe.ai/mcp` (`softprobe/explorer` `src/mcp/tools.ts`).
 
 ## Auth and workspaces
 
@@ -32,6 +32,13 @@ All 15 tools exposed by `https://explorer.softprobe.ai/mcp` (`softprobe/explorer
 
 - `search_traces`
   - Optional: `query` (TraceQL selector, e.g. `{}` or `{ status = error && .sp.session.id !~ ".+" }`), `from_time` (ISO-8601 UTC), `to_time` (ISO-8601 UTC), `min_duration` (string, e.g. `100ms`), `max_duration` (string, e.g. `5s`), `limit` (integer, default 20)
+- `list_trace_tags`
+  - Lists available span and resource attribute tag names for TraceQL queries.
+  - Optional: `from_time` (ISO-8601 UTC), `to_time` (ISO-8601 UTC)
+- `list_trace_tag_values`
+  - Lists observed values for a TraceQL attribute tag.
+  - Required: `tag` (string)
+  - Optional: `from_time` (ISO-8601 UTC), `to_time` (ISO-8601 UTC)
 - `get_trace`
   - Required: `trace_id` (string)
   - Optional: `from` (ISO-8601 UTC, defaults to 90-day lookback), `to` (ISO-8601 UTC, defaults to now), `session_id` (string), `limit` (integer), `cursor` (string)
