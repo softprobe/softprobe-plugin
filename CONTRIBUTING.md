@@ -8,7 +8,7 @@ Thanks for helping improve Softprobe skills.
 2. **Symlink install.** `install.sh` and `npx skills` must symlink by default. `--copy` is an escape hatch only.
 3. **No secrets.** Never commit tokens, `.env`, or `~/.softprobe` material. Do not ask users to paste JWTs into issues or chat.
 4. **Read-only Agent QA skill.** Do not add ingest, score writes, or arbitrary SQL to `softprobe-agent-qa`.
-5. **Apache-2.0.** Contributions are under the same license as the repository.
+5. **MIT.** Contributions are under the same license as the repository.
 
 ## Develop
 

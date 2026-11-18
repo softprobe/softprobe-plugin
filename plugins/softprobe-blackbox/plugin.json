@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "softprobe-blackbox",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Softprobe Blackbox MCP server and skills for investigating AI agent sessions, OpenTelemetry traces, spans, logs, and managing Explorer agents.",
   "author": {
     "name": "SoftProbe, Inc.",
@@ -10,7 +10,7 @@
   },
   "homepage": "https://explorer.softprobe.ai",
   "repository": "https://github.com/softprobe/softprobe-plugin",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "keywords": [
     "softprobe",
     "blackbox",

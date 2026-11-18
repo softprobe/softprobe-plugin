@@ -138,7 +138,7 @@ tests/                                              # Manifest and skill placeme
 
 ## License
 
-Apache License 2.0. See [LICENSE](./LICENSE) and [NOTICE](./NOTICE).
+MIT License. See [LICENSE](./LICENSE).
 
 ## Operator note
 
