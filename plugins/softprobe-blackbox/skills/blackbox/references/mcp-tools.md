@@ -1,6 +1,6 @@
 # Blackbox MCP tool reference
 
-All 15 tools exposed by `https://explorer.softprobe.ai/mcp` (`sp-llm/apps/explorer/src/mcp/tools.ts`).
+All 15 tools exposed by `https://explorer.softprobe.ai/mcp` (`softprobe/explorer` `src/mcp/tools.ts`).
 
 ## Auth and workspaces
 
