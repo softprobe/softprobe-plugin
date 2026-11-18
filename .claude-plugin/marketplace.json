@@ -6,19 +6,19 @@
   },
   "metadata": {
     "description": "Official Softprobe plugins for AI coding agents.",
-    "version": "0.2.5"
+    "version": "0.2.6"
   },
   "plugins": [
     {
       "name": "softprobe-blackbox",
       "source": "./plugins/softprobe-blackbox",
       "description": "Diagnose Blackbox sessions, traces, generations, and tool errors in Softprobe Explorer.",
-      "version": "0.2.5",
+      "version": "0.2.6",
       "author": {
         "name": "SoftProbe, Inc.",
         "email": "support@softprobe.ai"
       },
-      "license": "Apache-2.0",
+      "license": "MIT",
       "category": "monitoring"
     }
   ]

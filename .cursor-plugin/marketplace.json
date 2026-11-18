@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Official Softprobe plugins for Cursor.",
-    "version": "0.2.5"
+    "version": "0.2.6"
   },
   "plugins": [
     {

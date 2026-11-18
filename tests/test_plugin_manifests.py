@@ -43,7 +43,7 @@ class BlackboxPluginManifestTests(unittest.TestCase):
             "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
         )
         self.assertEqual(data.get("name"), "softprobe-blackbox")
-        self.assertEqual(data.get("version"), "0.2.5")
+        self.assertEqual(data.get("version"), "0.2.6")
         self.assertTrue(isinstance(data.get("description"), str) and data["description"].strip())
         self.assertEqual(
             data.get("author"),
@@ -55,7 +55,7 @@ class BlackboxPluginManifestTests(unittest.TestCase):
         )
         self.assertEqual(data.get("homepage"), "https://explorer.softprobe.ai")
         self.assertEqual(data.get("repository"), "https://github.com/softprobe/softprobe-plugin")
-        self.assertEqual(data.get("license"), "Apache-2.0")
+        self.assertEqual(data.get("license"), "MIT")
         self.assertEqual(
             data.get("keywords"),
             ["softprobe", "blackbox", "mcp", "observability", "opentelemetry", "debugging"],
