@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validation tests for plugins/blackbox manifests, MCP configs, assets, and skill."""
+"""Validation tests for plugins/softprobe-blackbox manifests, MCP configs, assets, and skill."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-BLACKBOX_DIR = ROOT / "plugins" / "blackbox"
+BLACKBOX_DIR = ROOT / "plugins" / "softprobe-blackbox"
 EXPLORER_MCP_URL = "https://explorer.softprobe.ai/mcp"
 
 EXPECTED_MCP_TOOLS = (
@@ -40,7 +40,7 @@ class BlackboxPluginManifestTests(unittest.TestCase):
             data.get("$schema"),
             "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
         )
-        self.assertEqual(data.get("name"), "blackbox")
+        self.assertEqual(data.get("name"), "softprobe-blackbox")
         self.assertEqual(data.get("version"), "0.2.0")
         self.assertTrue(isinstance(data.get("description"), str) and data["description"].strip())
         self.assertEqual(

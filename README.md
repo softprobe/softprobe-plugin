@@ -6,7 +6,7 @@ Official multi-product plugin marketplace from SoftProbe, Inc. (`softprobe/softp
 
 | Plugin | Path | Description |
 |---|---|---|
-| `blackbox` | [`plugins/blackbox/`](./plugins/blackbox/) | Hosted Explorer MCP server (`https://explorer.softprobe.ai/mcp`) and skills for session, trace, span, log, and Agent workflows. |
+| `softprobe-blackbox` | [`plugins/softprobe-blackbox/`](./plugins/softprobe-blackbox/) | Hosted Explorer MCP server (`https://explorer.softprobe.ai/mcp`) and skills for session, trace, span, log, and Agent workflows. |
 
 ## Install Softprobe Blackbox
 
@@ -16,7 +16,7 @@ Install the plugin from the marketplace:
 
 ```bash
 claude plugin marketplace add softprobe/softprobe-plugin
-claude plugin install blackbox@softprobe
+claude plugin install softprobe-blackbox@softprobe
 ```
 
 Or add the hosted MCP server directly:
@@ -59,7 +59,7 @@ gemini extensions install https://github.com/softprobe/softprobe-plugin
 
 ### Antigravity
 
-Add `plugins/blackbox/mcp_config.json` to `~/.gemini/config/mcp_config.json` (global) or `.agents/mcp_config.json` (workspace), and install the skill:
+Add `plugins/softprobe-blackbox/mcp_config.json` to `~/.gemini/config/mcp_config.json` (global) or `.agents/mcp_config.json` (workspace), and install the skill:
 
 ```bash
 npx skills add softprobe/softprobe-plugin -g -y -a antigravity -s blackbox
@@ -76,7 +76,7 @@ npx skills add softprobe/softprobe-plugin -g -y -a opencode -s blackbox
 
 ### Windsurf
 
-Add the `mcpServers.blackbox` entry from `plugins/blackbox/mcp_config.json` to `~/.codeium/windsurf/mcp_config.json`:
+Add the `mcpServers.blackbox` entry from `plugins/softprobe-blackbox/mcp_config.json` to `~/.codeium/windsurf/mcp_config.json`:
 
 ```json
 {
@@ -99,7 +99,7 @@ The first MCP tool call opens a browser window to sign in to [Softprobe Explorer
 ```text
 assets/softprobe-mark.svg                  # Marketplace brand mark
 plugins/
-  blackbox/
+  softprobe-blackbox/
     plugin.json                            # Agent Plugins manifest
     .mcp.json                              # Streamable HTTP MCP config
     mcp_config.json                        # Antigravity / Windsurf MCP config

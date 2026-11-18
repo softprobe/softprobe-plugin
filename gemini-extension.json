@@ -2,7 +2,7 @@
   "name": "softprobe",
   "version": "0.2.0",
   "description": "Softprobe Blackbox extension for Gemini CLI. Diagnose sessions, traces, generations, and tool errors in Explorer.",
-  "contextFileName": "plugins/blackbox/skills/blackbox/SKILL.md",
+  "contextFileName": "plugins/softprobe-blackbox/skills/blackbox/SKILL.md",
   "mcpServers": {
     "blackbox": {
       "httpUrl": "https://explorer.softprobe.ai/mcp"
