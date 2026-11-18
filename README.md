@@ -4,11 +4,17 @@ Official multi-product plugin marketplace from SoftProbe, Inc. (`softprobe/softp
 
 ## Plugins
 
-| Plugin | Path | Status | Description |
+| Plugin | Location | Status | Description |
 |---|---|---|---|
 | `softprobe-blackbox` | [`plugins/softprobe-blackbox/`](./plugins/softprobe-blackbox/) | Available | Hosted Explorer MCP server (`https://explorer.softprobe.ai/mcp`) and skills for session, trace, span, log, and Agent workflows. |
+| `@softprobe/opencode-blackbox` | [softprobe/softprobe-js](https://github.com/softprobe/softprobe-js/tree/main/packages/opencode-blackbox) ([npm](https://www.npmjs.com/package/@softprobe/opencode-blackbox)) | Available | Compiled OpenCode npm plugin that registers the `blackbox` MCP server and skill. |
 | `softprobe-arex` | [`plugins/softprobe-arex/`](./plugins/softprobe-arex/) | Coming soon | Record, replay, and diff verification. |
 | `softprobe-lisa` | [`plugins/softprobe-lisa/`](./plugins/softprobe-lisa/) | Coming soon | Policy evaluation and activity monitoring. |
+
+### Where plugins live (`softprobe-plugin` vs `softprobe-js`)
+
+- **`softprobe/softprobe-plugin`** (this repo) holds static GitHub-hosted manifests and `SKILL.md` files for Claude Code, Cursor, Codex, VS Code / GitHub Copilot, Gemini CLI, Windsurf, and Antigravity.
+- **[`softprobe/softprobe-js`](https://github.com/softprobe/softprobe-js)** holds compiled TypeScript/JavaScript runtime plugins distributed via npm, such as [`@softprobe/opencode-blackbox`](https://github.com/softprobe/softprobe-js/tree/main/packages/opencode-blackbox) and [`@softprobe/opencode-plugin`](https://github.com/softprobe/softprobe-js/tree/main/packages/opencode-plugin).
 
 ## Install Softprobe Blackbox
 
@@ -56,7 +62,7 @@ code --add-mcp '{"name":"blackbox","type":"http","url":"https://explorer.softpro
 Install the extension directly from GitHub:
 
 ```bash
-gemini extensions install https://github.com/softprobe/softprobe-plugin
+gemini extensions install https://github.com/softprobe/softprobe-plugin --ref main --consent
 ```
 
 ### Antigravity
@@ -69,7 +75,13 @@ npx skills add softprobe/softprobe-plugin -g -y -a antigravity -s blackbox
 
 ### OpenCode
 
-Add the hosted MCP server and skill:
+Install the npm plugin from [`softprobe/softprobe-js`](https://github.com/softprobe/softprobe-js/tree/main/packages/opencode-blackbox) (also on [npm](https://www.npmjs.com/package/@softprobe/opencode-blackbox)):
+
+```bash
+opencode plugin @softprobe/opencode-blackbox -g
+```
+
+Or add the hosted MCP server and skill manually:
 
 ```bash
 opencode mcp add blackbox --global --url https://explorer.softprobe.ai/mcp
