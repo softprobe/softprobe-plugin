@@ -43,7 +43,7 @@ class BlackboxPluginManifestTests(unittest.TestCase):
             "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
         )
         self.assertEqual(data.get("name"), "softprobe-blackbox")
-        self.assertEqual(data.get("version"), "0.2.0")
+        self.assertEqual(data.get("version"), "0.2.5")
         self.assertTrue(isinstance(data.get("description"), str) and data["description"].strip())
         self.assertEqual(
             data.get("author"),
