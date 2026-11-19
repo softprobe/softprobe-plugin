@@ -1,7 +1,7 @@
 ---
 name: blackbox
-description: Investigate Softprobe Blackbox sessions, OpenTelemetry traces, spans, and logs in Explorer, and manage registered Agents via hosted MCP at https://explorer.softprobe.ai/mcp. Use when debugging agent runs, tool errors, LLM generations, trace latency, or provisioning Explorer agents and ingestion keys.
-when_to_use: Softprobe Blackbox, Explorer sessions, traces, spans, logs, TraceQL, ingestion key, create agent, blackbox MCP
+description: Investigate Softprobe Blackbox sessions, OpenTelemetry traces, spans, and logs in Explorer, and manage registered Agents via hosted MCP at https://explorer.softprobe.ai/mcp. Use when debugging agent runs, tool errors, LLM generations, trace latency, or bootstrapping projects with Explorer agents and ingestion keys (`bootstrap_project`).
+when_to_use: Softprobe Blackbox, Explorer sessions, traces, spans, logs, TraceQL, bootstrap_project, ingestion key, create agent, blackbox MCP
 ---
 
 # Softprobe Blackbox
@@ -28,10 +28,11 @@ If `blackbox` tools are unavailable, tell the user to add the server in their cl
 | Discover TraceQL tag names and values | `list_trace_tags`, `list_trace_tag_values` | Inspect span/resource attributes before `search_traces` |
 | Inspect one trace | `get_trace` | Pass `trace_id`; optional `from`, `to`, `session_id` |
 | Read correlated logs | `logs_by_session`, `logs_by_trace` | Bounded scan (`limit` 1 to 500, default 100) |
+| Bootstrap a project | `bootstrap_project` | Provisions or reuses workspace, Agent, and Ingestion Key |
 | List or create Agents | `list_agents`, `create_agent` | `create_agent` returns a new Ingestion Key |
 | Fetch an Agent Ingestion Key | `get_ingestion_key` | Pass `agent_id` only when the user asks for it |
 
-For full parameter schemas, defaults, and enum values, read [references/mcp-tools.md](references/mcp-tools.md).
+For full parameter schemas, defaults, and enum values, read [references/mcp-tools.md](references/mcp-tools.md). For terminal-first or non-agent projects, run `npx @softprobe/blackbox init` instead of MCP.
 
 ## Investigation workflow
 
@@ -42,6 +43,6 @@ For full parameter schemas, defaults, and enum values, read [references/mcp-tool
 
 ## Guardrails
 
-- Treat `create_agent` and `get_ingestion_key` outputs as sensitive credentials. Only call `get_ingestion_key` or `create_agent` when the user asks to register an app or retrieve its key.
-- Never call `https://thelake.softprobe.ai` directly with a user token, and never send `X-Softprobe-Assertion`.
+- Treat `bootstrap_project`, `create_agent`, and `get_ingestion_key` outputs as sensitive credentials. Only call them when the user asks to bootstrap a project, register an app, or retrieve its key.
+- Send OTLP traces to `https://thelake.softprobe.ai/v1/traces` (or `https://explorer.softprobe.ai/api/thelake/v1/traces`) using `Authorization: Bearer spk_...`. Never send Explorer user tokens or `X-Softprobe-Assertion` directly to `thelake.softprobe.ai`.
 - Blackbox MCP queries Explorer telemetry and manages Agents. It does not ingest OTLP spans directly.

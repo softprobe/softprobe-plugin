@@ -26,6 +26,7 @@ EXPECTED_MCP_TOOLS = (
     "get_trace",
     "logs_by_session",
     "logs_by_trace",
+    "bootstrap_project",
     "list_agents",
     "create_agent",
     "get_ingestion_key",
@@ -105,8 +106,8 @@ class BlackboxPluginManifestTests(unittest.TestCase):
             },
         )
 
-    def test_blackbox_skill_covers_all_17_tools(self) -> None:
-        self.assertEqual(len(EXPECTED_MCP_TOOLS), 17)
+    def test_blackbox_skill_covers_all_18_tools(self) -> None:
+        self.assertEqual(len(EXPECTED_MCP_TOOLS), 18)
         skill_path = BLACKBOX_DIR / "skills" / "blackbox" / "SKILL.md"
         self.assertTrue(skill_path.is_file(), f"Missing {skill_path}")
         skill_text = skill_path.read_text(encoding="utf-8")
@@ -117,7 +118,7 @@ class BlackboxPluginManifestTests(unittest.TestCase):
         ref_path = BLACKBOX_DIR / "skills" / "blackbox" / "references" / "mcp-tools.md"
         self.assertTrue(ref_path.is_file(), f"Missing {ref_path}")
         ref_text = ref_path.read_text(encoding="utf-8")
-        self.assertIn("All 17 tools", ref_text)
+        self.assertIn("All 18 tools", ref_text)
         for tool_name in EXPECTED_MCP_TOOLS:
             self.assertIn(
                 f"`{tool_name}`",

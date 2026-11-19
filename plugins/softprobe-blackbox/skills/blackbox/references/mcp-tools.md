@@ -1,12 +1,12 @@
 # Blackbox MCP tool reference
 
-All 17 tools exposed by `https://explorer.softprobe.ai/mcp` (`softprobe/explorer` `src/mcp/tools.ts`).
+All 18 tools exposed by `https://explorer.softprobe.ai/mcp` (`softprobe/explorer` `src/mcp/tools.ts`).
 
 ## Auth and workspaces
 
 - `whoami`. No parameters. Checks Explorer login and lists workspaces.
 - `list_workspaces`. No parameters. Lists workspaces for the signed-in user.
-- `select_workspace` — `workspace_id` (string, required). Sets the active workspace when the API returns `workspace_picker_required`.
+- `select_workspace`. Required `workspace_id` (string). Sets the active workspace when the API returns `workspace_picker_required`.
 
 ## Sessions
 
@@ -54,6 +54,9 @@ All 17 tools exposed by `https://explorer.softprobe.ai/mcp` (`softprobe/explorer
 
 ## Agents and ingestion keys
 
+- `bootstrap_project`
+  - Optional: `project_name` (string), `framework` (string), `environment` (string)
+  - Provisions or reuses a workspace, Agent, and Ingestion Key in one call. Returns `workspaceId`, `agentId`, `ingestionKey`, `envVar`, and `otlpEndpoint`.
 - `list_agents`. No parameters. Lists registered Agents in the active workspace.
 - `create_agent`
   - Required: `name` (non-empty string)

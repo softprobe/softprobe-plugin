@@ -102,22 +102,30 @@ Add the `mcpServers.blackbox` entry from `plugins/softprobe-blackbox/mcp_config.
 }
 ```
 
+### Terminal-first CLI
+
+For terminal-first or non-agent setups, run [`@softprobe/blackbox`](https://github.com/softprobe/softprobe-js/tree/main/packages/blackbox) to provision a workspace, Agent, and Ingestion Key.
+
+```bash
+npx @softprobe/blackbox init
+```
+
 ## Authenticate and use
 
 The first MCP tool call opens a browser window to sign in to [Softprobe Explorer](https://explorer.softprobe.ai) via OAuth. After you approve access, ask your agent to investigate telemetry or manage Agents.
 
 > Use Blackbox: why did session `sess_...` fail? Check tool errors, spans, and correlated logs.
 
-## Blackbox MCP tools (17)
+## Blackbox MCP tools (18)
 
-The hosted server at `https://explorer.softprobe.ai/mcp` exposes 17 tools (see [`plugins/softprobe-blackbox/skills/blackbox/references/mcp-tools.md`](./plugins/softprobe-blackbox/skills/blackbox/references/mcp-tools.md) for full parameter schemas):
+The hosted server at `https://explorer.softprobe.ai/mcp` exposes 18 tools (see [`plugins/softprobe-blackbox/skills/blackbox/references/mcp-tools.md`](./plugins/softprobe-blackbox/skills/blackbox/references/mcp-tools.md) for full parameter schemas):
 
 - **Auth & workspaces:** `whoami`, `list_workspaces`, `select_workspace`
 - **Sessions:** `search_sessions`, `get_session`, `get_session_spans`
 - **Spans:** `search_spans`, `get_span`
 - **Traces:** `search_traces`, `list_trace_tags`, `list_trace_tag_values`, `get_trace`
 - **Logs:** `logs_by_session`, `logs_by_trace`
-- **Agents & ingestion keys:** `list_agents`, `create_agent`, `get_ingestion_key`
+- **Agents & ingestion keys:** `bootstrap_project`, `list_agents`, `create_agent`, `get_ingestion_key`
 
 ## Repository layout
 
@@ -130,7 +138,7 @@ plugins/
     mcp_config.json                                 # Antigravity / Windsurf MCP config
     assets/softprobe-mark.svg                       # Plugin logo
     skills/blackbox/SKILL.md                        # Blackbox skill & tool routing
-    skills/blackbox/references/mcp-tools.md         # Full 17-tool MCP reference
+    skills/blackbox/references/mcp-tools.md         # Full 18-tool MCP reference
   softprobe-arex/                                   # Coming soon: record, replay, and diff verification
   softprobe-lisa/                                   # Coming soon: policy evaluation and activity monitoring
 tests/                                              # Manifest and skill placement tests
