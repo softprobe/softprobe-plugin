@@ -19,6 +19,22 @@
         "displayName": "Softprobe Blackbox",
         "shortDescription": "Diagnose Blackbox sessions, traces, and tool errors in Explorer"
       }
+    },
+    {
+      "name": "softprobe-arex",
+      "source": {
+        "source": "local",
+        "path": "./plugins/softprobe-arex"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "NONE"
+      },
+      "category": "Developer Tools",
+      "interface": {
+        "displayName": "Softprobe Arex",
+        "shortDescription": "Synthesize, fork, execute, and triage unified Arex test cases via sp mcp"
+      }
     }
   ]
 }

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "softprobe-arex",
+  "version": "0.2.6",
+  "description": "Softprobe Arex MCP server and feature-testing skill for unified test case authoring, dependency injection rules, Google CEL assertions, requirement coverage, and regression triage.",
+  "author": {
+    "name": "SoftProbe, Inc.",
+    "email": "support@softprobe.ai",
+    "url": "https://softprobe.ai"
+  },
+  "homepage": "https://docs.softprobe.ai/en/arex/",
+  "repository": "https://github.com/softprobe/softprobe-plugin",
+  "license": "MIT",
+  "keywords": [
+    "softprobe",
+    "arex",
+    "mcp",
+    "testing",
+    "record-replay",
+    "regression"
+  ],
+  "extensions": {
+    "com.openai": {
+      "displayName": "Softprobe Arex",
+      "category": "Developer Tools",
+      "logo": "assets/softprobe-mark.svg"
+    }
+  }
+}
