@@ -131,6 +131,19 @@ Example `arex.test-case/v1` document:
     },
     "dependencies": [
       {
+        "category": "HttpClient",
+        "operationName": "/ndc/servicelist",
+        "request": {
+          "attributes": { "HttpMethod": "POST", "ContentType": "application/json" },
+          "body": "{\"orderId\":\"ORD-9001\"}"
+        },
+        "response": {
+          "status": 200,
+          "headers": { "Content-Type": "application/json" },
+          "body": "{\"services\":[{\"serviceCode\":\"BAG1\",\"amount\":50}]}"
+        }
+      },
+      {
         "category": "Database",
         "operationName": "loyalty_member@SELECT",
         "request": { "body": "SELECT tier FROM loyalty_member WHERE order_id = ?" },
