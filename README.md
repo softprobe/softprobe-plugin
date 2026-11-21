@@ -8,7 +8,7 @@ Official multi-product plugin marketplace from SoftProbe, Inc. (`softprobe/softp
 |---|---|---|---|
 | `softprobe-blackbox` | [`plugins/softprobe-blackbox/`](./plugins/softprobe-blackbox/) | Available | Hosted Explorer MCP server (`https://explorer.softprobe.ai/mcp`) and skills for session, trace, span, log, and Agent workflows. |
 | `@softprobe/opencode-blackbox` | [softprobe/softprobe-js](https://github.com/softprobe/softprobe-js/tree/main/packages/opencode-blackbox) ([npm](https://www.npmjs.com/package/@softprobe/opencode-blackbox)) | Available | Compiled OpenCode npm plugin that registers the `blackbox` MCP server and skill. |
-| `softprobe-arex` | [`plugins/softprobe-arex/`](./plugins/softprobe-arex/) | Coming soon | Record, replay, and diff verification. |
+| `softprobe-arex` | [`plugins/softprobe-arex/`](./plugins/softprobe-arex/) | Available | Stdio `sp mcp` server and `arex-feature-test` skill for unified `arex.test-case/v1` authoring, dependency mocking, Google CEL assertions, requirement coverage, and regression triage. |
 | `softprobe-lisa` | [`plugins/softprobe-lisa/`](./plugins/softprobe-lisa/) | Coming soon | Policy evaluation and activity monitoring. |
 
 ### Where plugins live (`softprobe-plugin` vs `softprobe-js`)
@@ -102,11 +102,45 @@ Add the `mcpServers.blackbox` entry from `plugins/softprobe-blackbox/mcp_config.
 }
 ```
 
+## Install Softprobe Arex
+
+Softprobe Arex runs a local stdio MCP server (`sp mcp`) backed by your configured `sp` CLI profile (`SP_API_URL` and `SP_TOKEN` or `sp auth login`).
+
+### Quick setup with `sp mcp setup`
+
+Generate or merge the MCP configuration file in your project root:
+
+```bash
+sp mcp setup --client cursor --dir .
+# Supported clients: cursor | claude | antigravity | codex
+```
+
+### Claude Code and Cursor marketplace
+
+```bash
+claude plugin marketplace add softprobe/softprobe-plugin
+claude plugin install softprobe-arex@softprobe
+```
+
+In Cursor, add `softprobe/softprobe-plugin` under **Plugins** and install `softprobe-arex`.
+
+### Antigravity, Codex, and Windsurf
+
+Merge [`plugins/softprobe-arex/mcp_config.json`](./plugins/softprobe-arex/mcp_config.json) into your MCP config, and install the feature-testing skill:
+
+```bash
+npx skills add softprobe/softprobe-plugin -g -y -a antigravity -s arex-feature-test
+```
+
 ## Authenticate and use
 
-The first MCP tool call opens a browser window to sign in to [Softprobe Explorer](https://explorer.softprobe.ai) via OAuth. After you approve access, ask your agent to investigate telemetry or manage Agents.
+For **Blackbox**, the first MCP tool call opens a browser window to sign in to [Softprobe Explorer](https://explorer.softprobe.ai) via OAuth. After you approve access, ask your agent to investigate telemetry or manage Agents.
 
 > Use Blackbox: why did session `sess_...` fail? Check tool errors, spans, and correlated logs.
+
+For **Arex**, configure `sp` with `sp setup` or `sp auth login`, then ask your agent to verify a feature branch with unified test cases.
+
+> Use Arex: check untested requirements for `travel-ota`, fork a baseline case for the new baggage discount endpoint, and verify it against `http://127.0.0.1:8081`.
 
 ## Blackbox MCP tools (17)
 
@@ -119,21 +153,38 @@ The hosted server at `https://explorer.softprobe.ai/mcp` exposes 17 tools (see [
 - **Logs:** `logs_by_session`, `logs_by_trace`
 - **Agents & ingestion keys:** `list_agents`, `create_agent`, `get_ingestion_key`
 
+## Arex MCP tools (8)
+
+The stdio server `sp mcp` exposes 8 tools (see [`plugins/softprobe-arex/skills/arex-feature-test/references/mcp-tools.md`](./plugins/softprobe-arex/skills/arex-feature-test/references/mcp-tools.md) for full parameter schemas):
+
+- **Context & coverage:** `arex_discover_context`, `arex_list_cases_and_coverage`
+- **Authoring & forking:** `arex_export_baseline`, `arex_apply_test_case`
+- **Execution & external suites:** `arex_run_test_case`, `arex_import_external_results`
+- **Defects & logs:** `arex_link_or_file_issue`, `arex_query_logs`
+
 ## Repository layout
 
 ```text
-assets/softprobe-mark.svg                           # Marketplace brand mark
+assets/softprobe-mark.svg                                     # Marketplace brand mark
 plugins/
   softprobe-blackbox/
-    plugin.json                                     # Agent Plugins manifest
-    .mcp.json                                       # Streamable HTTP MCP config
-    mcp_config.json                                 # Antigravity / Windsurf MCP config
-    assets/softprobe-mark.svg                       # Plugin logo
-    skills/blackbox/SKILL.md                        # Blackbox skill & tool routing
-    skills/blackbox/references/mcp-tools.md         # Full 17-tool MCP reference
-  softprobe-arex/                                   # Coming soon: record, replay, and diff verification
-  softprobe-lisa/                                   # Coming soon: policy evaluation and activity monitoring
-tests/                                              # Manifest and skill placement tests
+    plugin.json                                               # Agent Plugins manifest
+    .mcp.json                                                 # Streamable HTTP MCP config
+    mcp_config.json                                           # Antigravity / Windsurf MCP config
+    assets/softprobe-mark.svg                                 # Plugin logo
+    skills/blackbox/SKILL.md                                  # Blackbox skill & tool routing
+    skills/blackbox/references/mcp-tools.md                   # Full 17-tool MCP reference
+  softprobe-arex/
+    plugin.json                                               # Agent Plugins manifest
+    .claude-plugin/plugin.json                                # Claude Code plugin manifest
+    .cursor-plugin/plugin.json                                # Cursor plugin manifest
+    .mcp.json                                                 # Stdio sp mcp config
+    mcp_config.json                                           # Antigravity / Windsurf MCP config
+    assets/softprobe-mark.svg                                 # Plugin logo
+    skills/arex-feature-test/SKILL.md                         # Feature-testing skill & 5-step loop
+    skills/arex-feature-test/references/mcp-tools.md          # Full 8-tool MCP reference
+  softprobe-lisa/                                             # Coming soon: policy evaluation and activity monitoring
+tests/                                                        # Manifest and skill placement tests
 ```
 
 ## License

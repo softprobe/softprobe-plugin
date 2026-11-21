@@ -20,6 +20,18 @@
       },
       "license": "MIT",
       "category": "monitoring"
+    },
+    {
+      "name": "softprobe-arex",
+      "source": "./plugins/softprobe-arex",
+      "description": "Synthesize, fork, execute, and triage unified Arex test cases with dependency injection rules and Google CEL assertions.",
+      "version": "0.2.6",
+      "author": {
+        "name": "SoftProbe, Inc.",
+        "email": "support@softprobe.ai"
+      },
+      "license": "MIT",
+      "category": "testing"
     }
   ]
 }

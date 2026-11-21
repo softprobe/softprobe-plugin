@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "arex": {
+      "command": "sp",
+      "args": [
+        "mcp"
+      ]
+    }
+  }
+}

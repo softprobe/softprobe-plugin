@@ -13,6 +13,11 @@
       "name": "softprobe-blackbox",
       "source": "./plugins/softprobe-blackbox",
       "description": "Diagnose Blackbox sessions, traces, generations, and tool errors in Softprobe Explorer."
+    },
+    {
+      "name": "softprobe-arex",
+      "source": "./plugins/softprobe-arex",
+      "description": "Synthesize, fork, execute, and triage unified Arex test cases with dependency injection rules and Google CEL assertions."
     }
   ]
 }

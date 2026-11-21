@@ -1,0 +1,32 @@
+{
+  "name": "softprobe-arex",
+  "displayName": "Softprobe Arex",
+  "description": "Synthesize, fork, execute, and triage unified Arex test cases with dependency injection rules and Google CEL assertions.",
+  "version": "0.2.6",
+  "author": {
+    "name": "SoftProbe, Inc.",
+    "email": "support@softprobe.ai"
+  },
+  "homepage": "https://docs.softprobe.ai/en/arex/",
+  "repository": "https://github.com/softprobe/softprobe-plugin",
+  "license": "MIT",
+  "keywords": [
+    "softprobe",
+    "arex",
+    "mcp",
+    "testing",
+    "record-replay",
+    "regression"
+  ],
+  "skills": [
+    "./skills/arex-feature-test"
+  ],
+  "mcpServers": {
+    "arex": {
+      "command": "sp",
+      "args": [
+        "mcp"
+      ]
+    }
+  }
+}

@@ -1,3 +1,6 @@
 {
-  "skills": ["plugins/softprobe-blackbox/skills/blackbox"]
+  "skills": [
+    "plugins/softprobe-blackbox/skills/blackbox",
+    "plugins/softprobe-arex/skills/arex-feature-test"
+  ]
 }
