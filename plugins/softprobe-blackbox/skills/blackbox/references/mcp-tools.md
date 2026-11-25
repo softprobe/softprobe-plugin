@@ -1,6 +1,6 @@
 # Blackbox MCP tool reference
 
-All 17 tools exposed by `https://explorer.softprobe.ai/mcp` (`softprobe/explorer` `src/mcp/tools.ts`).
+All 19 tools exposed by `https://explorer.softprobe.ai/mcp` (`softprobe/explorer` `src/mcp/tools.ts`).
 
 ## Auth and workspaces
 
@@ -18,6 +18,10 @@ All 17 tools exposed by `https://explorer.softprobe.ai/mcp` (`softprobe/explorer
   - Optional: `limit` (integer, default 200)
 - `get_session_spans`
   - Required: `session_id` (string)
+- `get_session_semantic_actions`
+  - Required: `session_id` (string)
+  - Optional: `include_passive` (boolean, default `false`), `format` (`"text"` | `"json"`, default `"text"`)
+  - Returns a compact semantic action timeline (flow segments, CSS/ARIA locators, `[non-interactive]` noise tags, and caused `trace_id`s with HTTP status and 1-line downstream summaries).
 
 ## Spans
 
@@ -62,3 +66,6 @@ All 17 tools exposed by `https://explorer.softprobe.ai/mcp` (`softprobe/explorer
 - `get_ingestion_key`
   - Required: `agent_id` (non-empty string)
   - Returns the Agent's Ingestion Key.
+- `bootstrap_project`
+  - Optional: `project_name` (non-empty string), `framework` (non-empty string), `environment` (non-empty string)
+  - Provisions or reuses a workspace, Agent, and Ingestion Key in one call for telemetry setup.
