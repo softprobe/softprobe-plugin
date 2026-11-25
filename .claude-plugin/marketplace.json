@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Official Softprobe plugins for AI coding agents.",
-    "version": "0.2.6"
+    "version": "0.2.7"
   },
   "plugins": [
     {
       "name": "softprobe-blackbox",
       "source": "./plugins/softprobe-blackbox",
-      "description": "Diagnose Blackbox sessions, traces, generations, and tool errors in Softprobe Explorer.",
-      "version": "0.2.6",
+      "description": "Diagnose Blackbox sessions, traces, generations, and tool errors in Softprobe Explorer, and generate Playwright UI tests from recorded sessions.",
+      "version": "0.2.7",
       "author": {
         "name": "SoftProbe, Inc.",
         "email": "support@softprobe.ai"

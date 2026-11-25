@@ -45,7 +45,7 @@ class BlackboxPluginManifestTests(unittest.TestCase):
             "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
         )
         self.assertEqual(data.get("name"), "softprobe-blackbox")
-        self.assertEqual(data.get("version"), "0.2.6")
+        self.assertEqual(data.get("version"), "0.2.7")
         self.assertTrue(isinstance(data.get("description"), str) and data["description"].strip())
         self.assertEqual(
             data.get("author"),
@@ -128,6 +128,44 @@ class BlackboxPluginManifestTests(unittest.TestCase):
                 ref_text,
                 f"Tool missing from mcp-tools.md: {tool_name}",
             )
+
+    def test_marketplace_and_client_manifests_match_0_2_7(self) -> None:
+        expected_version = "0.2.7"
+        manifest_paths = (
+            BLACKBOX_DIR / ".claude-plugin" / "plugin.json",
+            BLACKBOX_DIR / ".cursor-plugin" / "plugin.json",
+            BLACKBOX_DIR / ".codex-plugin" / "plugin.json",
+            ROOT / "gemini-extension.json",
+        )
+        for path in manifest_paths:
+            self.assertTrue(path.is_file(), f"Missing {path}")
+            data = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(data.get("version"), expected_version, f"Version mismatch in {path}")
+
+        for marketplace_path in (
+            ROOT / ".claude-plugin" / "marketplace.json",
+            ROOT / ".cursor-plugin" / "marketplace.json",
+        ):
+            data = json.loads(marketplace_path.read_text(encoding="utf-8"))
+            self.assertEqual(data.get("metadata", {}).get("version"), expected_version)
+
+        cursor_manifest = json.loads(
+            (BLACKBOX_DIR / ".cursor-plugin" / "plugin.json").read_text(encoding="utf-8")
+        )
+        self.assertTrue((BLACKBOX_DIR / cursor_manifest["logo"]).is_file())
+        self.assertTrue((BLACKBOX_DIR / cursor_manifest["skills"]).is_dir())
+        self.assertTrue((BLACKBOX_DIR / cursor_manifest["mcpServers"]).is_file())
+
+        codex_manifest = json.loads(
+            (BLACKBOX_DIR / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(codex_manifest.get("name"), "softprobe-blackbox")
+        self.assertTrue((BLACKBOX_DIR / codex_manifest["skills"]).is_dir())
+        self.assertTrue((BLACKBOX_DIR / codex_manifest["mcpServers"]).is_file())
+        iface = codex_manifest.get("interface", {})
+        self.assertEqual(iface.get("displayName"), "Softprobe Blackbox")
+        self.assertTrue((BLACKBOX_DIR / iface["logo"]).is_file())
+        self.assertTrue((BLACKBOX_DIR / iface["composerIcon"]).is_file())
 
 
 if __name__ == "__main__":
