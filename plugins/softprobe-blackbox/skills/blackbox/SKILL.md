@@ -28,6 +28,7 @@ If `blackbox` tools are unavailable, tell the user to add the server in their cl
 | Discover TraceQL tag names and values | `list_trace_tags`, `list_trace_tag_values` | Inspect span/resource attributes before `search_traces` |
 | Inspect one trace | `get_trace` | Pass `trace_id`; optional `from`, `to`, `session_id` |
 | Read correlated logs | `logs_by_session`, `logs_by_trace` | Bounded scan (`limit` 1 to 500, default 100) |
+| Compile session to E2E test | `compile_session_test` | Generates Playwright or `@softprobe/e2e` suite from `session_id` |
 | Bootstrap a project | `bootstrap_project` | Provisions or reuses workspace, Agent, and Ingestion Key |
 | List or create Agents | `list_agents`, `create_agent` | `create_agent` returns a new Ingestion Key |
 | Fetch an Agent Ingestion Key | `get_ingestion_key` | Pass `agent_id` only when the user asks for it |

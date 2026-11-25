@@ -1,6 +1,6 @@
 # Blackbox MCP tool reference
 
-All 18 tools exposed by `https://explorer.softprobe.ai/mcp` (`softprobe/explorer` `src/mcp/tools.ts`).
+All 19 tools exposed by `https://explorer.softprobe.ai/mcp` (`softprobe/explorer` `src/mcp/tools.ts`).
 
 ## Auth and workspaces
 
@@ -65,3 +65,10 @@ All 18 tools exposed by `https://explorer.softprobe.ai/mcp` (`softprobe/explorer
 - `get_ingestion_key`
   - Required: `agent_id` (non-empty string)
   - Returns the Agent's Ingestion Key.
+
+## Test compilation
+
+- `compile_session_test`
+  - Required: `session_id` (string)
+  - Optional: `runner` (`playwright` | `e2e`, default `playwright`), `target_url` (string)
+  - Compiles a recorded Blackbox session's `softprobe.ui.action` spans and correlated HTTP traces into a Playwright or `@softprobe/e2e` test suite.
