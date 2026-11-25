@@ -1,0 +1,47 @@
+{
+  "name": "softprobe-blackbox",
+  "version": "0.2.7",
+  "description": "Investigate Blackbox sessions, OpenTelemetry traces, spans, and logs in Softprobe Explorer, and generate Playwright UI tests from recorded sessions.",
+  "author": {
+    "name": "SoftProbe, Inc.",
+    "email": "support@softprobe.ai",
+    "url": "https://softprobe.ai"
+  },
+  "homepage": "https://explorer.softprobe.ai",
+  "repository": "https://github.com/softprobe/softprobe-plugin",
+  "license": "MIT",
+  "keywords": [
+    "softprobe",
+    "blackbox",
+    "mcp",
+    "observability",
+    "opentelemetry",
+    "ui-testing",
+    "playwright",
+    "agent-qa"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Softprobe Blackbox",
+    "shortDescription": "Debug agent sessions and generate UI tests from Explorer",
+    "longDescription": "Connect Codex to Softprobe Explorer via hosted MCP to search sessions, inspect OpenTelemetry traces, spans, and logs, provision project telemetry, and turn recorded browser sessions into Playwright and @softprobe/e2e tests.",
+    "developerName": "SoftProbe, Inc.",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://explorer.softprobe.ai",
+    "privacyPolicyURL": "https://softprobe.ai/privacy",
+    "termsOfServiceURL": "https://softprobe.ai/terms",
+    "defaultPrompt": [
+      "Use Blackbox get_session_semantic_actions on a recorded session and write a Playwright + @softprobe/e2e UI test",
+      "Use Blackbox to diagnose why my latest failing session errored",
+      "Bootstrap Blackbox telemetry for this project"
+    ],
+    "composerIcon": "./assets/softprobe-mark.svg",
+    "logo": "./assets/softprobe-mark.svg",
+    "screenshots": []
+  }
+}

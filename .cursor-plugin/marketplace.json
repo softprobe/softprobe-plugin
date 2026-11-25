@@ -6,13 +6,13 @@
   },
   "metadata": {
     "description": "Official Softprobe plugins for Cursor.",
-    "version": "0.2.6"
+    "version": "0.2.7"
   },
   "plugins": [
     {
       "name": "softprobe-blackbox",
       "source": "./plugins/softprobe-blackbox",
-      "description": "Diagnose Blackbox sessions, traces, generations, and tool errors in Softprobe Explorer."
+      "description": "Diagnose Blackbox sessions, traces, generations, and tool errors in Softprobe Explorer, and generate Playwright UI tests from recorded sessions."
     }
   ]
 }
