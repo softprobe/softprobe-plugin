@@ -1,7 +1,7 @@
 ---
 name: blackbox
-description: Investigate Softprobe Blackbox sessions, OpenTelemetry traces, spans, and logs in Explorer, and manage registered Agents via hosted MCP at https://explorer.softprobe.ai/mcp. Use when debugging agent runs, tool errors, LLM generations, trace latency, or provisioning Explorer agents and ingestion keys.
-when_to_use: Softprobe Blackbox, Explorer sessions, traces, spans, logs, TraceQL, ingestion key, create agent, blackbox MCP
+description: Investigate Softprobe Blackbox sessions, OpenTelemetry traces, spans, and logs in Explorer, generate UI tests from recorded sessions, and manage registered Agents via hosted MCP at https://explorer.softprobe.ai/mcp. Use when debugging agent runs, tool errors, LLM generations, trace latency, generating Playwright or E2E UI tests from recorded sessions, or provisioning Explorer projects, agents, and ingestion keys.
+when_to_use: Softprobe Blackbox, Explorer sessions, traces, spans, logs, TraceQL, ingestion key, create agent, bootstrap project, UI testing, Playwright, semantic actions, blackbox MCP
 ---
 
 # Softprobe Blackbox
@@ -22,6 +22,7 @@ If `blackbox` tools are unavailable, tell the user to add the server in their cl
 | Switch active workspace | `select_workspace` | Call when the API returns `workspace_picker_required` |
 | Search sessions in a window | `search_sessions` | Requires UTC `from_time` and `to_time` |
 | Inspect one session | `get_session`, `get_session_spans` | Pass `session_id` |
+| Read UI semantic action timeline | `get_session_semantic_actions` | Pass `session_id`; use for UI test generation |
 | Search spans in a window | `search_spans` | Requires UTC `from_time` and `to_time` |
 | Inspect one span | `get_span` | Pass `span_id`; optional `from`, `to`, `session_id` |
 | Search traces with TraceQL | `search_traces` | Includes unassigned traces without `session_id` |
@@ -30,6 +31,7 @@ If `blackbox` tools are unavailable, tell the user to add the server in their cl
 | Read correlated logs | `logs_by_session`, `logs_by_trace` | Bounded scan (`limit` 1 to 500, default 100) |
 | List or create Agents | `list_agents`, `create_agent` | `create_agent` returns a new Ingestion Key |
 | Fetch an Agent Ingestion Key | `get_ingestion_key` | Pass `agent_id` only when the user asks for it |
+| Provision project telemetry setup | `bootstrap_project` | Reuses or creates workspace, Agent, and Ingestion Key |
 
 For full parameter schemas, defaults, and enum values, read [references/mcp-tools.md](references/mcp-tools.md).
 
@@ -40,8 +42,16 @@ For full parameter schemas, defaults, and enum values, read [references/mcp-tool
 3. For a failing session, call `get_session` and `get_session_spans`, then check `logs_by_session` or `get_trace` for root-cause errors.
 4. Cite exact `session_id`, `trace_id`, and `span_id` values in findings, and link sessions as `https://explorer.softprobe.ai?session=<session_id>`.
 
+## UI test generation workflow
+
+1. Call `get_session_semantic_actions` with `session_id` (keep `include_passive: false` unless scroll/resize assertions are needed) to read the segmented timeline of `softprobe.ui.action` steps, rich CSS/ARIA locators, `[non-interactive]` tags, and caused `trace_id` summaries.
+2. Prune stray `[non-interactive]` clicks and retried failed attempts that do not belong in the target user flow.
+3. Call `get_trace(trace_id)` on selected caused traces to inspect full HTTP request and response bodies and downstream `CLIENT` calls.
+4. Write a `@playwright/test` + `@softprobe/e2e` test (or `e2e` suite) using the locators from `get_session_semantic_actions`, binding any `{ kind: "secret", slot }` inputs to `process.env.SP_SECRET_<SLOT>`, and asserting backend side effects with `trace.outboundHttp` and `trace.expectNoOutboundHttp`.
+5. Add cleanup in `afterEach` so repeated test runs stay idempotent.
+
 ## Guardrails
 
-- Treat `create_agent` and `get_ingestion_key` outputs as sensitive credentials. Only call `get_ingestion_key` or `create_agent` when the user asks to register an app or retrieve its key.
+- Treat `create_agent`, `get_ingestion_key`, and `bootstrap_project` outputs as sensitive credentials. Only call them when the user asks to register an app, bootstrap telemetry setup, or retrieve an Ingestion Key.
 - Never call `https://thelake.softprobe.ai` directly with a user token, and never send `X-Softprobe-Assertion`.
 - Blackbox MCP queries Explorer telemetry and manages Agents. It does not ingest OTLP spans directly.

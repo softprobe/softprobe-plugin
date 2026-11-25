@@ -108,16 +108,18 @@ The first MCP tool call opens a browser window to sign in to [Softprobe Explorer
 
 > Use Blackbox: why did session `sess_...` fail? Check tool errors, spans, and correlated logs.
 
-## Blackbox MCP tools (17)
+> Use Blackbox `get_session_semantic_actions` on session `sess_...`, inspect caused traces with `get_trace`, and write a `@playwright/test` + `@softprobe/e2e` UI test.
 
-The hosted server at `https://explorer.softprobe.ai/mcp` exposes 17 tools (see [`plugins/softprobe-blackbox/skills/blackbox/references/mcp-tools.md`](./plugins/softprobe-blackbox/skills/blackbox/references/mcp-tools.md) for full parameter schemas):
+## Blackbox MCP tools (19)
+
+The hosted server at `https://explorer.softprobe.ai/mcp` exposes 19 tools (see [`plugins/softprobe-blackbox/skills/blackbox/references/mcp-tools.md`](./plugins/softprobe-blackbox/skills/blackbox/references/mcp-tools.md) for full parameter schemas):
 
 - **Auth & workspaces:** `whoami`, `list_workspaces`, `select_workspace`
-- **Sessions:** `search_sessions`, `get_session`, `get_session_spans`
+- **Sessions & UI actions:** `search_sessions`, `get_session`, `get_session_spans`, `get_session_semantic_actions`
 - **Spans:** `search_spans`, `get_span`
 - **Traces:** `search_traces`, `list_trace_tags`, `list_trace_tag_values`, `get_trace`
 - **Logs:** `logs_by_session`, `logs_by_trace`
-- **Agents & ingestion keys:** `list_agents`, `create_agent`, `get_ingestion_key`
+- **Agents & ingestion keys:** `list_agents`, `create_agent`, `get_ingestion_key`, `bootstrap_project`
 
 ## Repository layout
 
@@ -130,7 +132,7 @@ plugins/
     mcp_config.json                                 # Antigravity / Windsurf MCP config
     assets/softprobe-mark.svg                       # Plugin logo
     skills/blackbox/SKILL.md                        # Blackbox skill & tool routing
-    skills/blackbox/references/mcp-tools.md         # Full 17-tool MCP reference
+    skills/blackbox/references/mcp-tools.md         # Full 19-tool MCP reference
   softprobe-arex/                                   # Coming soon: record, replay, and diff verification
   softprobe-lisa/                                   # Coming soon: policy evaluation and activity monitoring
 tests/                                              # Manifest and skill placement tests
