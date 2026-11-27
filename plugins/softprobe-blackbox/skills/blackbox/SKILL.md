@@ -52,6 +52,48 @@ For full parameter schemas, defaults, and enum values, read [references/mcp-tool
 
 ## Guardrails
 
-- Treat `create_agent`, `get_ingestion_key`, and `bootstrap_project` outputs as sensitive credentials. Only call them when the user asks to register an app, bootstrap telemetry setup, or retrieve an Ingestion Key.
+- Treat `create_agent`, `get_ingestion_key`, and `bootstrap_project` outputs as sensitive credentials. Only call them when the user asks to register an app, bootstrap telemetry setup, enable coding agent trajectory capture, or retrieve an Ingestion Key.
 - Never call `https://thelake.softprobe.ai` directly with a user token, and never send `X-Softprobe-Assertion`.
 - Blackbox MCP queries Explorer telemetry and manages Agents. It does not ingest OTLP spans directly.
+
+## Coding agent trajectory capture setup
+
+When the user asks to capture their coding agent's own trajectory (Codex, Cursor, Claude Code, or OpenCode) into Explorer:
+
+1. Call `bootstrap_project` (e.g. `project_name` matching the client such as `codex`, `cursor`, `claude-code`, or `opencode`) to provision an Agent and obtain `ingestionKey` and `otlpEndpoint`.
+2. Write the client's local telemetry config with `chmod 600` (never commit keys to git):
+   - **Codex CLI (`~/.codex/config.toml`)**:
+     ```toml
+     [otel]
+     environment = "production"
+     log_user_prompt = true
+
+     [otel.exporter.otlp-http]
+     endpoint = "<otlpEndpoint without /v1/traces>/v1/logs"
+     protocol = "binary"
+     headers = { Authorization = "Bearer <ingestionKey>" }
+
+     [otel.trace_exporter.otlp-http]
+     endpoint = "<otlpEndpoint>"
+     protocol = "binary"
+     headers = { Authorization = "Bearer <ingestionKey>" }
+     ```
+   - **Cursor & Claude Code (`~/.config/softprobe/agent-telemetry.json`)**:
+     ```json
+     {
+       "ingestionKey": "<ingestionKey>",
+       "otlpEndpoint": "<otlpEndpoint>"
+     }
+     ```
+     The `softprobe-blackbox` plugin hooks (`npx -y @softprobe/blackbox hook`) automatically read this file and remain a no-op until it exists.
+   - **OpenCode (`~/.config/opencode/opencode-softprobe.json`)**:
+     ```json
+     {
+       "ingestionKey": "<ingestionKey>",
+       "otlp": {
+         "tracesEndpoint": "<otlpEndpoint>",
+         "protocol": "http/protobuf"
+       }
+     }
+     ```
+     `@softprobe/opencode-blackbox` automatically activates trajectory capture when this file exists.

@@ -155,6 +155,20 @@ class BlackboxPluginManifestTests(unittest.TestCase):
         self.assertTrue((BLACKBOX_DIR / cursor_manifest["logo"]).is_file())
         self.assertTrue((BLACKBOX_DIR / cursor_manifest["skills"]).is_dir())
         self.assertTrue((BLACKBOX_DIR / cursor_manifest["mcpServers"]).is_file())
+        cursor_hooks_path = BLACKBOX_DIR / cursor_manifest["hooks"]
+        self.assertTrue(cursor_hooks_path.is_file())
+        cursor_hooks = json.loads(cursor_hooks_path.read_text(encoding="utf-8"))
+        self.assertIn("beforeSubmitPrompt", cursor_hooks.get("hooks", {}))
+        self.assertIn("postToolUse", cursor_hooks.get("hooks", {}))
+
+        claude_manifest = json.loads(
+            (BLACKBOX_DIR / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8")
+        )
+        claude_hooks_path = BLACKBOX_DIR / claude_manifest["hooks"]
+        self.assertTrue(claude_hooks_path.is_file())
+        claude_hooks = json.loads(claude_hooks_path.read_text(encoding="utf-8"))
+        self.assertIn("UserPromptSubmit", claude_hooks.get("hooks", {}))
+        self.assertIn("PostToolUse", claude_hooks.get("hooks", {}))
 
         codex_manifest = json.loads(
             (BLACKBOX_DIR / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8")

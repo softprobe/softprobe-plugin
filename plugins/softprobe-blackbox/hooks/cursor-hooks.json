@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeSubmitPrompt": [
+      {
+        "command": "npx -y @softprobe/blackbox hook --agent cursor"
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": "npx -y @softprobe/blackbox hook --agent cursor"
+      }
+    ],
+    "postToolUse": [
+      {
+        "command": "npx -y @softprobe/blackbox hook --agent cursor"
+      }
+    ],
+    "postToolUseFailure": [
+      {
+        "command": "npx -y @softprobe/blackbox hook --agent cursor"
+      }
+    ],
+    "afterAgentThought": [
+      {
+        "command": "npx -y @softprobe/blackbox hook --agent cursor"
+      }
+    ],
+    "afterAgentResponse": [
+      {
+        "command": "npx -y @softprobe/blackbox hook --agent cursor"
+      }
+    ],
+    "stop": [
+      {
+        "command": "npx -y @softprobe/blackbox hook --agent cursor"
+      }
+    ]
+  }
+}

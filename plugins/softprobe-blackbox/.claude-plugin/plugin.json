@@ -21,6 +21,7 @@
   "skills": [
     "./skills/blackbox"
   ],
+  "hooks": "./hooks/claude-hooks.json",
   "mcpServers": {
     "blackbox": {
       "type": "http",
