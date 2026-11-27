@@ -14,6 +14,7 @@
   "logo": "./assets/softprobe-mark.svg",
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
+  "hooks": "./hooks/cursor-hooks.json",
   "keywords": [
     "softprobe",
     "blackbox",
